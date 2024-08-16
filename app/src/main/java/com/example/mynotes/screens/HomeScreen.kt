@@ -53,8 +53,6 @@ fun HomeScreen(
                 NotesItem(
                     event = viewModel::onEvent,
                     note = notes,
-                    title = notes.title,
-                    description = notes.description,
                     onClick = {
                         val id = notes.id
                         navController.navigate(Routes.AddEditScreen.route + "/$id")

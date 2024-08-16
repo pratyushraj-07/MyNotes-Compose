@@ -29,8 +29,6 @@ import com.example.mynotes.ui.NoteEvents
 
 @Composable
 fun NotesItem(
-    title: String,
-    description:String,
     event: (NoteEvents)->Unit,
     note: NotesEntity,
     onClick:()->Unit
@@ -59,7 +57,7 @@ fun NotesItem(
             )
             {
                 Text(
-                    text = title,
+                    text = note.title,
                     color = Color.White,
                     fontSize = 22.sp,
                     fontWeight = FontWeight.Bold,
@@ -68,7 +66,7 @@ fun NotesItem(
                 )
 
                 Text(
-                    text = description,
+                    text = note.description,
                     color = Color.White,
                     fontSize = 18.sp,
                     maxLines = 1,
@@ -80,7 +78,6 @@ fun NotesItem(
             IconButton(onClick = { event(NoteEvents.DeleteNote(id = note.id)) }) {
                 Icon(imageVector = Icons.Default.Delete, contentDescription = "delete")
             }
-
         }
     }
 }
