@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mynotes.data.NotesDao
 import com.example.mynotes.data.NotesEntity
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -16,7 +17,7 @@ class NoteViewModel(
     val noteList: StateFlow<List<NotesEntity>> = _noteList
 
     init{
-        viewModelScope.launch {
+        viewModelScope.launch (Dispatchers.IO){
             dao.getAllNote().collect{notes->
                 _noteList.value = notes
             }
@@ -30,7 +31,7 @@ class NoteViewModel(
     fun onEvent(events: NoteEvents) {
         when (events) {
             is NoteEvents.AddNote -> {
-                viewModelScope.launch {
+                viewModelScope.launch(Dispatchers.IO) {
                     dao.addNote(
                         NotesEntity(
                             title = events.title,
@@ -42,14 +43,14 @@ class NoteViewModel(
             }
 
             is NoteEvents.DeleteNote -> {
-                viewModelScope.launch {
+                viewModelScope.launch (Dispatchers.IO){
                     dao.deleteNote(id = events.id)
                     refreshNotes()
                 }
             }
 
             is NoteEvents.EditNote -> {
-                viewModelScope.launch {
+                viewModelScope.launch(Dispatchers.IO) {
                     dao.updateNote(
                         NotesEntity(
                             id = events.id,
@@ -62,7 +63,7 @@ class NoteViewModel(
             }
 
             NoteEvents.OnLoadNotes -> {
-                viewModelScope.launch { refreshNotes() }
+                viewModelScope.launch (Dispatchers.IO) { refreshNotes() }
             }
         }
     }
