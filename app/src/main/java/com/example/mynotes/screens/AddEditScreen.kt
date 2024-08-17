@@ -59,8 +59,8 @@ fun AddEditScreen(
         topBar = {
             TopBar(
                 title = if (id == 0L) "Add Note" else "Edit Note",
-                showNavIcon = true
-            ) { navController.navigateUp() }
+                onBackClick = { navController.navigateUp() }
+            )
         },
         modifier = Modifier.fillMaxSize(),
         containerColor = colorResource(id = R.color.RichTaupe)

@@ -3,6 +3,7 @@ package com.example.mynotes.component
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -13,7 +14,9 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -23,8 +26,8 @@ import com.example.mynotes.R
 @Composable
 fun TopBar(
     title:String,
-    showNavIcon: Boolean,
-    onBackClick:()->Unit
+    onBackClick:(() -> Unit)? = null,
+    onDeleteAllClick: (() -> Unit)? = null
 ) {
     TopAppBar(
         modifier = Modifier.fillMaxWidth(),
@@ -41,11 +44,20 @@ fun TopBar(
             }
         },
         navigationIcon = {
-            if(showNavIcon){
-                IconButton(onClick = onBackClick) {
+            onBackClick?.let {
+                IconButton(onClick = it) {
                     Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
                 }
             }
+
+        },
+        actions = {
+            onDeleteAllClick?.let {
+                IconButton(onClick = it,
+                    modifier = Modifier.padding(end = 16.dp).size(35.dp)) {
+                    Icon(painter = painterResource(id = R.drawable.delete_forever_svgrepo_com), contentDescription = "Delete all",)
+                }
+            }
         }
-        )
+    )
 }

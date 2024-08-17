@@ -23,6 +23,7 @@ import com.example.mynotes.R
 import com.example.mynotes.component.NotesItem
 import com.example.mynotes.component.TopBar
 import com.example.mynotes.nav_graph.Routes
+import com.example.mynotes.ui.NoteEvents
 import com.example.mynotes.ui.NoteViewModel
 
 @Composable
@@ -33,7 +34,10 @@ fun HomeScreen(
     val noteList by viewModel.noteList.collectAsState()
 
     Scaffold(
-        topBar = { TopBar(title = "MyNotes", showNavIcon = false) {} },
+        topBar = { TopBar(
+            title = "MyNotes",
+            onDeleteAllClick = {viewModel.onEvent(NoteEvents.DeleteAllNote)}
+        )},
         modifier = Modifier.fillMaxSize(),
         containerColor = colorResource(id = R.color.RichTaupe),
         floatingActionButton = {

@@ -61,6 +61,13 @@ class NoteViewModel(
                     refreshNotes()
                 }
             }
+
+            is NoteEvents.DeleteAllNote-> {
+                viewModelScope.launch {
+                    dao.deleteAllNote()
+                    refreshNotes()
+                }
+            }
         }
     }
 
