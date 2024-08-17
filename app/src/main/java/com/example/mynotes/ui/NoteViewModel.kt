@@ -61,10 +61,6 @@ class NoteViewModel(
                     refreshNotes()
                 }
             }
-
-            NoteEvents.OnLoadNotes -> {
-                viewModelScope.launch (Dispatchers.IO) { refreshNotes() }
-            }
         }
     }
 

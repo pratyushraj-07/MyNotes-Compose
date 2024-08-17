@@ -16,7 +16,4 @@ sealed class NoteEvents {
     data class DeleteNote(
         val id: Long
     ): NoteEvents()
-
-    data object OnLoadNotes: NoteEvents()
-
 }
