@@ -61,12 +61,15 @@ fun HomeScreen(
         ) {
             items(noteList, key = { note -> note.id }) { notes ->
                 NotesItem(
-                    event = viewModel::onEvent,
                     note = notes,
                     onClick = {
                         val id = notes.id
                         navController.navigate(Routes.AddEditScreen.route + "/$id")
-                    })
+                    },
+                    onDelete = {
+                        viewModel.onEvent(NoteEvents.DeleteNote(id = notes.id))
+                    }
+                )
             }
         }
     }

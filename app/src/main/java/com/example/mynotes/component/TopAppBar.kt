@@ -14,7 +14,6 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -55,7 +54,7 @@ fun TopBar(
             onDeleteAllClick?.let {
                 IconButton(onClick = it,
                     modifier = Modifier.padding(end = 16.dp).size(35.dp)) {
-                    Icon(painter = painterResource(id = R.drawable.delete_forever_svgrepo_com), contentDescription = "Delete all",)
+                    Icon(painter = painterResource(id = R.drawable.delete_forever_svgrepo_com), contentDescription = "Delete all")
                 }
             }
         }

@@ -29,9 +29,9 @@ import com.example.mynotes.ui.NoteEvents
 
 @Composable
 fun NotesItem(
-    event: (NoteEvents)->Unit,
     note: NotesEntity,
-    onClick:()->Unit
+    onClick:()->Unit,
+    onDelete:()->Unit
 ) {
     Card(
         modifier = Modifier
@@ -62,20 +62,18 @@ fun NotesItem(
                     fontSize = 22.sp,
                     fontWeight = FontWeight.Bold,
                     maxLines = 1,
-                    style = MaterialTheme.typography.titleMedium,
+                    style = MaterialTheme.typography.titleMedium
                 )
-
                 Text(
                     text = note.description,
                     color = Color.White,
                     fontSize = 18.sp,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
-                    style = MaterialTheme.typography.bodyMedium,
+                    style = MaterialTheme.typography.bodyMedium
                 )
             }
-
-            IconButton(onClick = { event(NoteEvents.DeleteNote(id = note.id)) }) {
+            IconButton(onClick =  onDelete ) {
                 Icon(imageVector = Icons.Default.Delete, contentDescription = "delete")
             }
         }
