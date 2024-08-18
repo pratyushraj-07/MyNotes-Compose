@@ -1,5 +1,6 @@
 package com.example.mynotes.component
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -53,7 +54,9 @@ fun TopBar(
         actions = {
             onDeleteAllClick?.let {
                 IconButton(onClick = it,
-                    modifier = Modifier.padding(end = 16.dp).size(35.dp)) {
+                    modifier = Modifier
+                        .padding(end = 16.dp)
+                        .size(35.dp)) {
                     Icon(painter = painterResource(id = R.drawable.delete_forever_svgrepo_com), contentDescription = "Delete all")
                 }
             }

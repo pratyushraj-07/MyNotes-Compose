@@ -1,19 +1,20 @@
 package com.example.mynotes.nav_graph
 
+import androidx.compose.animation.AnimatedContentTransitionScope
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.scaleIn
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.lifecycle.asLiveData
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.mynotes.data.NotesDao
 import com.example.mynotes.screens.AddEditScreen
 import com.example.mynotes.screens.HomeScreen
-import com.example.mynotes.ui.NoteEvents
 import com.example.mynotes.ui.NoteViewModel
 
 @Composable
@@ -21,9 +22,15 @@ fun Navigation(
     viewModel: NoteViewModel,
     navController: NavHostController = rememberNavController()
 ) {
-
-    NavHost(navController = navController, startDestination = Routes.HomeScreen.route) {
-        composable(Routes.HomeScreen.route) {
+    NavHost(
+        navController = navController,
+        startDestination = Routes.HomeScreen.route
+    ) {
+        composable(
+            route = Routes.HomeScreen.route,
+            enterTransition = { slideInHorizontally() },
+            exitTransition = { slideOutHorizontally(animationSpec = tween(500)) }
+        ){
             HomeScreen(
                 navController = navController,
                 viewModel = viewModel
@@ -38,7 +45,19 @@ fun Navigation(
                     nullable = false
                     defaultValue = 0L
                 }
-            )
+            ),
+            enterTransition = {
+                slideIntoContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Left,
+                    animationSpec = tween(350)
+                )
+            },
+            exitTransition = {
+                slideOutOfContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Right,
+                    animationSpec = tween(400)
+                )
+            }
         ) {
             val id = it.arguments!!.getLong("id")
             val note = viewModel.getNoteById(id)
@@ -49,6 +68,5 @@ fun Navigation(
                 note = note
             )
         }
-
     }
 }
