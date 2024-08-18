@@ -1,11 +1,6 @@
 # MyNotes-Note-app
 # Description
 - A simple notes app built using Kotlin, Jetpack Compose and Room DB.
-- Follows the MVVM architecture.
-- Allows users to:
-  - Create and edit notes.
-  - Delete individual notes.
-  - Delete all notes at once.
 - Includes animations for:
   - Navigation.
   - Note deletion.
