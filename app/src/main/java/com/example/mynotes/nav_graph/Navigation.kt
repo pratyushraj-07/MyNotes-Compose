@@ -1,9 +1,7 @@
 package com.example.mynotes.nav_graph
 
 import androidx.compose.animation.AnimatedContentTransitionScope
-import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.tween
-import androidx.compose.animation.scaleIn
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
